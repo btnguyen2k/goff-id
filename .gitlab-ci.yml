@@ -53,6 +53,7 @@ build docker image:
     - /^test-.*$/
   script:
     - date
+    - cd $APP_ROOT && dep ensure && go build server.go
     - cd $APP_ROOT && docker build --force-rm --squash -t $DOCKER_REGISTRY_SERVER/$CI_PROJECT_NAME:$CI_PROJECT_VERSION .
     - docker rmi $(docker images -f "dangling=true" -q)
   tags:
