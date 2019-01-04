@@ -13,24 +13,22 @@ before_script:
   - "export CI_PROJECT_DEPLOY_DIR=$DIR_DEPLOY/$CI_PROJECT_NAME-$CI_PROJECT_VERSION"
   - "echo CI_PROJECT_DEPLOY_DIR: $CI_PROJECT_DEPLOY_DIR"
 
-#after_script:
-#
-#stages:
-#  - build
-#  - test
-#  - docker-build
-#  - docker-release
-#
-#build:
-#  stage: build
-#  script:
-#    - date
-#    - sbt -Djline.terminal=jline.UnsupportedTerminal clean compile
-#  tags:
-#    - gitlabci-build
-#    - java
-#    - scom
-#
+after_script:
+
+stages:
+  - build
+  - test
+  - docker-build
+  - docker-release
+
+build:
+  stage: build
+  script:
+    - date
+  tags:
+    - gitlabci-build
+    - golang
+
 #test:
 #  stage: test
 #  only:
