@@ -1,3 +1,7 @@
+// Server to generate unique IDs.
+//
+// #author Thanh Nguyen <btnguyen2k@gmail.com>
+// #version 1.0.0
 package main
 
 import (
