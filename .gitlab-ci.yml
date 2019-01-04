@@ -12,6 +12,7 @@ before_script:
   - "echo CI_PROJECT_VERSION: $CI_COMMIT_REF_NAME --\\> $CI_PROJECT_VERSION"
   - "export CI_PROJECT_DEPLOY_DIR=$DIR_DEPLOY/$CI_PROJECT_NAME-$CI_PROJECT_VERSION"
   - "echo CI_PROJECT_DEPLOY_DIR: $CI_PROJECT_DEPLOY_DIR"
+  - "export GOPATH=`pwd`"
 
 after_script:
 
@@ -25,6 +26,7 @@ build:
   stage: build
   script:
     - date
+    - cd $GOPATH && dep ensure && go build server.go
   tags:
     - gitlabci-build
     - golang
@@ -38,6 +40,7 @@ test:
     - /^test-.*$/
   script:
     - date
+    - cd $GOPATH && dep ensure && go test -v -count=1
   tags:
     - gitlabci-build
     - golang
