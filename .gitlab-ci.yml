@@ -26,7 +26,7 @@ build:
   stage: build
   script:
     - date
-    - cd $GOPATH && dep ensure && go build server.go
+    - cd $GOPATH/src/github.com/btnguyen2k/goff-id && dep ensure && go build server.go
   tags:
     - gitlabci-build
     - golang
@@ -40,7 +40,7 @@ test:
     - /^test-.*$/
   script:
     - date
-    - cd $GOPATH && dep ensure && go test -v -count=1
+    - cd $GOPATH/src/github.com/btnguyen2k/goff-id && dep ensure && go test -v -count=1
   tags:
     - gitlabci-build
     - golang
