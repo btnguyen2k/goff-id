@@ -4,13 +4,14 @@
 cache:
 
 variables:
-  APP_ROOT: $GOPATH/src/github.com/btnguyen2k/goff-id
+  APP_ROOT: ./src/github.com/btnguyen2k/goff-id
 
 before_script:
   - whoami && pwd && date
   - "export CI_PROJECT_VERSION=`echo $CI_COMMIT_REF_NAME | cut -d'-' -f 2`"
   - "echo CI_PROJECT_VERSION: $CI_COMMIT_REF_NAME --\\> $CI_PROJECT_VERSION"
   - "export GOPATH=`pwd`"
+  - "export APP_ROOT=$GOPATH/$APP_ROOT"
   - "echo APP_ROOT: $APP_ROOT"
 
 after_script:
