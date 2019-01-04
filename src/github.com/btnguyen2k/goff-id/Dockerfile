@@ -1,4 +1,4 @@
 FROM alpine:3.8
-ADD server /server
-ADD README.md /README.md
+COPY server /server
+COPY README.md /README.md
 ENTRYPOINT /server
