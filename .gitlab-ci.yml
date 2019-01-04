@@ -4,12 +4,14 @@
 cache:
 
 variables:
+  APP_ROOT: $GOPATH/src/github.com/btnguyen2k/goff-id
 
 before_script:
   - whoami && pwd && date
   - "export CI_PROJECT_VERSION=`echo $CI_COMMIT_REF_NAME | cut -d'-' -f 2`"
   - "echo CI_PROJECT_VERSION: $CI_COMMIT_REF_NAME --\\> $CI_PROJECT_VERSION"
   - "export GOPATH=`pwd`"
+  - "echo APP_ROOT: $APP_ROOT"
 
 after_script:
 
@@ -23,7 +25,7 @@ build:
   stage: build
   script:
     - date
-    - cd $GOPATH/src/github.com/btnguyen2k/goff-id && dep ensure && go build server.go
+    - cd $APP_ROOT && dep ensure && go build server.go
   tags:
     - gitlabci-build
     - golang
@@ -37,7 +39,7 @@ test:
     - /^test-.*$/
   script:
     - date
-    - cd $GOPATH/src/github.com/btnguyen2k/goff-id && dep ensure && go test -v -count=1
+    - cd $APP_ROOT && dep ensure && go test -v -count=1
   tags:
     - gitlabci-build
     - golang
@@ -50,7 +52,7 @@ build docker image:
     - /^test-.*$/
   script:
     - date
-    - docker build --force-rm --squash -t $DOCKER_REGISTRY_SERVER/$CI_PROJECT_NAME:$CI_PROJECT_VERSION .
+    - cd $APP_ROOT && docker build --force-rm --squash -t $DOCKER_REGISTRY_SERVER/$CI_PROJECT_NAME:$CI_PROJECT_VERSION .
     - docker rmi $(docker images -f "dangling=true" -q)
   tags:
     - gitlabci-build
