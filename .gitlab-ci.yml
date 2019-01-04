@@ -1,17 +1,14 @@
 # GitLab CI Runner configuration file
 # By Thanh Nguyen <btnguyen2k@gmail.com>
 
-#cache:
+cache:
 
 variables:
-  DIR_DEPLOY: $CI_PROJECT_NAME
 
 before_script:
   - whoami && pwd && date
   - "export CI_PROJECT_VERSION=`echo $CI_COMMIT_REF_NAME | cut -d'-' -f 2`"
   - "echo CI_PROJECT_VERSION: $CI_COMMIT_REF_NAME --\\> $CI_PROJECT_VERSION"
-  - "export CI_PROJECT_DEPLOY_DIR=$DIR_DEPLOY/$CI_PROJECT_NAME-$CI_PROJECT_VERSION"
-  - "echo CI_PROJECT_DEPLOY_DIR: $CI_PROJECT_DEPLOY_DIR"
   - "export GOPATH=`pwd`"
 
 after_script:
